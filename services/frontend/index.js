@@ -67,11 +67,10 @@ function clickSearchByID(){
         .then((data) => {
             console.log(data);
             if (data) {
-                const divs = document.getElementsByClassName("column is-4");
-                console.log("tam:", divs.length);
-                for(let i = 0; i < divs.length; i++){
-                    divs[i].remove();
-                }
+                const divs = Array.from(document.getElementsByClassName("column is-4"));
+                divs.forEach((div) => {
+                    div.remove();
+                });
                 books.appendChild(newBook(data));
 
                 document.querySelectorAll('.button-shipping').forEach((btn) => {
@@ -96,6 +95,7 @@ function clickSearchByID(){
 }
 
 document.addEventListener('DOMContentLoaded', function () {
+    console.log("loaded");
     const books = document.querySelector('.books');
 
     fetch('http://localhost:3000/products')
